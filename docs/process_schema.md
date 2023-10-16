@@ -1,0 +1,1 @@
+Input recebido pelo cliente ao receber uma mensagem. -> Esse input é separado em partes, contendo o comando
