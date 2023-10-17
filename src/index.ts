@@ -1,18 +1,23 @@
 import { Client, LocalAuth } from 'whatsapp-web.js'
 import { translate } from 'bing-translate-api'
-import qrcodeterminal from 'qrcode-terminal'
+import { generate } from 'qrcode-terminal'
 import { FormatMessage } from './handle/FormatMessage'
 import { config } from 'dotenv'
 config()
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    qrMaxRetries: 0
-})
-client.on('qr', (qr) => qrcodeterminal.generate(qr, { small: true }))
+    puppeteer: {
+      executablePath: "/usr/bin/chromium-browser",
+      //headless: false,
+      args: ["--no-sandbox","--disable-setuid-sandbox"],
+    },
+    // authStrategy: new LocalAuth()
+  })
+client.on('qr', (qr) => generate(qr, { small: true }))
 client.on('message_create', (msg) => {
     if (msg.body.startsWith('!')) {
         FormatMessage(msg.body,client,msg);
     }
+    if (msg.body == "MSG_TESTE") msg.reply('testou')
 })
 client.on('ready', () => console.log('servidor pronto!'));
 
