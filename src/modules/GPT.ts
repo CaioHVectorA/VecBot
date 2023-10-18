@@ -26,11 +26,13 @@ async function getResponse(message: Message) {
         "presence_penalty": 0,
         "frequency_penalty": 0,
         "top_p": 1,
-        "max_tokens": 100
+        "max_tokens": 100,
+        "wait_for_model": true
     };
     
-    const response = (await axios.post(url, data, { headers })).data
-    return response.choices[0].message.content as string
+    const response = (await axios.post(url, data, { headers }))
+    console.log(response.data)
+    return response.data.choices[0].message.content as string
 }
 
 export const GPT = new Command(['gpt','bard','ai'], 

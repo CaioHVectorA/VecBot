@@ -1,5 +1,5 @@
 export * from './Dice'
-export * from './GPT'
+// export * from './GPT'
 export * from './Sticker'
 export * from './preco'
 export * from './Pokemon'
