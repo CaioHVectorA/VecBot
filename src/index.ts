@@ -5,8 +5,12 @@ import { FormatMessage } from './handle/FormatMessage'
 import { config } from 'dotenv'
 config()
 const client = new Client({
-    authStrategy: new LocalAuth(),
-    qrMaxRetries: 0
+    puppeteer: {
+        executablePath: "/usr/bin/chromium-browser",
+        args: ['--no-sandbox','--disable-setuid-sandbox']
+    }
+    //authStrategy: new LocalAuth(),
+    //qrMaxRetries: 0
 })
 client.on('qr', (qr) => qrcodeterminal.generate(qr, { small: true }))
 client.on('message_create', (msg) => {
