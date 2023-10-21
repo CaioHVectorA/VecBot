@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Command } from '../handle/Command';
 import { Message } from 'whatsapp-web.js';
 async function getResponse(message: Message) {
+    console.log('rodou GPT')
     const chat = await message.getChat()
     const url = 'https://nyx-beta.samirawm7.repl.co/openai/chat/completions';
     
@@ -37,6 +38,7 @@ async function getResponse(message: Message) {
 
 export const GPT = new Command(['gpt','bard','ai'], 
     async function run({ client,command,msg,params }) {
+        console.log('iniciou script GPT')
         const response = await getResponse(msg)
         return await msg.reply(response) 
     })
