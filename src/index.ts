@@ -6,14 +6,14 @@ import { config } from 'dotenv'
 config()
 let readyDate: Date;
 const client = new Client({
-    // authTimeoutMs: 3000000,
-    // puppeteer: {
+    authTimeoutMs: 3000000,
+    puppeteer: {
         
-    //     executablePath: "/usr/bin/chromium-browser",
-    //     args: ['--no-sandbox','--disable-setuid-sandbox']
-    // }
-    authStrategy: new LocalAuth(),
-    qrMaxRetries: 0
+        executablePath: "/usr/bin/chromium-browser",
+        args: ['--no-sandbox','--disable-setuid-sandbox']
+    }
+    // authStrategy: new LocalAuth(),
+    // qrMaxRetries: 0
 })
 client.on('qr', (qr) => qrcodeterminal.generate(qr, { small: true }))
 client.on('message_create', (msg) => {
